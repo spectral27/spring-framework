@@ -1,6 +1,5 @@
 package spc;
 
-import jdk.jfr.consumer.RecordedObject;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -16,12 +15,16 @@ public class RecordRepository {
     }
 
     public void insertRecord() {
+        System.out.println("JdbcTemplate: insert into records (id) values (?)");
+
         this.jdbcTemplate.update(
                 "insert into records (id) values (?)",
                 UUID.randomUUID().toString());
     }
 
     public List<RecordObject> getRecords() {
+        System.out.println("JdbcTemplate: select * from records");
+
         List<RecordObject> records = jdbcTemplate.query(
                 "select * from records",
                 (resultSet, rowNum) -> {
