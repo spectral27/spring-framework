@@ -14,11 +14,11 @@ public class RecordRepository {
         this.entityManagerFactory = entityManagerFactory;
     }
 
-    public List<Record> getRecords() {
+    public List<RecordObject> getRecords() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        List<Record> records = entityManager
-                .createQuery("select r from Record r", Record.class)
+        List<RecordObject> records = entityManager
+                .createQuery("select r from RecordObject r", RecordObject.class)
                 .getResultList();
 
         entityManager.close();
@@ -30,10 +30,34 @@ public class RecordRepository {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        Record r = new Record();
+        RecordObject r = new RecordObject();
         r.setId(UUID.randomUUID().toString());
+        r.setRecordValue("insertValue");
 
         entityManager.persist(r);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    public void updateRecord(String id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        RecordObject r = entityManager.find(RecordObject.class, id);
+        r.setRecordValue("updateValue");
+
+        entityManager.merge(r);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    public void deleteRecord(String id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        RecordObject r = entityManager.find(RecordObject.class, id);
+
+        entityManager.remove(r);
         entityManager.getTransaction().commit();
         entityManager.close();
     }

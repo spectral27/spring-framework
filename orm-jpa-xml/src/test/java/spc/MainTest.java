@@ -21,7 +21,7 @@ public class MainTest {
     public void mainTest() {
         RecordRepository recordRepository = applicationContext.getBean(RecordRepository.class);
         recordRepository.insertRecord();
-        List<Record> records = recordRepository.getRecords();
+        List<RecordObject> records = recordRepository.getRecords();
         Assertions.assertNotNull(records);
         Assertions.assertEquals(1, records.size());
         Assertions.assertNotNull(records.get(0).getId());

@@ -12,13 +12,21 @@ public class Main {
 
         RecordRepository recordRepository = context.getBean(RecordRepository.class);
 
+        System.out.println("INSERT");
         recordRepository.insertRecord();
 
-        List<Record> records = recordRepository.getRecords();
+        System.out.println("SELECT");
+        List<RecordObject> records = recordRepository.getRecords();
 
-        for (int i = 0; i < records.size(); i++) {
-            System.out.println(records.get(i).getId());
-        }
+        records.forEach(r -> System.out.println(r.getId()));
+
+        String recordId = records.get(0).getId();
+
+        System.out.println("UPDATE");
+        recordRepository.updateRecord(recordId);
+
+        System.out.println("DELETE");
+        recordRepository.deleteRecord(recordId);
     }
 
 }
