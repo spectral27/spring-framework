@@ -71,9 +71,9 @@
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
-                                        <exclude>META-INF/spring/aot.factories</exclude>
-                                        <exclude>META-INF/MANIFEST.MF</exclude>
-                                        <exclude>META-INF/spring.tooling</exclude>
+                                        <exclude>META-INF/spring/*.factories</exclude>
+                                        <exclude>META-INF/*.MF</exclude>
+                                        <exclude>META-INF/*.tooling</exclude>
                                         <exclude>META-INF/*.txt</exclude>
                                     </excludes>
                                 </filter>
